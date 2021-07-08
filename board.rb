@@ -1,35 +1,28 @@
 class Board
 
     def initialize
-        @board = Array.new(3) { Array.new(3){"_"} }
+        @grid = Array.new(3) { Array.new(3){"_"} }
     end
 
     def valid?(position)
-        if self.empty?(position)
+        x = position[0] - 1
+        y = position[1] - 1
+        if  (@grid.length > x && x >= 0) && (@grid[0].length > y && y >= 0)
             return true
         else 
             return false
         end
     end
-
+    
     def empty?(position)
-        x = position[0]
-        y = position[1]
-        if @board[x-1][y-1] == "_"
+        x = position[0] - 1
+        y = position[1] - 1
+        if self.valid?(position) && (@grid[x][y] == "_")
             return true
-        else 
+        else
             return false
         end
     end
 
-    # def place_mark(position, mark)
-
-    #     if @board.valid?(position) && @board.empty?(position)
-    #         @board[position] = mark
-    #     else
-    #         puts "position not valid"
-    #     end
-
-    # end
     
 end
