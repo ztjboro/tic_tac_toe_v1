@@ -1,3 +1,4 @@
+
 class Board
 
     def initialize
@@ -38,6 +39,26 @@ class Board
     end
 
     def print
+        @grid.each do |row|
+            puts "_______________"
+            puts row.inspect
+        end
+    end
+
+    def win_row?(mark)
+        @grid.each do |row| 
+             if row.uniq.length == 1 && row[0] == mark
+                return true
+             end
+        end
+    end
+
+    def win_col?(mark)
+       @grid.transpose.each do |col| 
+             if col.uniq.length == 1 && col[0] == mark
+                return true
+             end
+        end
     end
 
     
