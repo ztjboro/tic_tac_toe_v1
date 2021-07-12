@@ -29,8 +29,8 @@ class Board
         x = position[0] - 1
         y = position[1] - 1
         if self.empty?(position)
-          @grid[x][y] = mark
-          return mark
+            @grid[x][y] = mark
+            return mark
         elsif !self.valid?(position)
             return "Position invalid"
         elsif !self.empty?(position)
@@ -47,19 +47,28 @@ class Board
 
     def win_row?(mark)
         @grid.each do |row| 
-             if row.uniq.length == 1 && row[0] == mark
+            if row.uniq.length == 1 && row[0] == mark
                 return true
-             end
+            end
         end
     end
 
     def win_col?(mark)
-       @grid.transpose.each do |col| 
-             if col.uniq.length == 1 && col[0] == mark
+        @grid.transpose.each do |col| 
+            if col.uniq.length == 1 && col[0] == mark
                 return true
-             end
+            end
         end
     end
 
+    def diagonals
+        [[@grid[0][0], @grid[1][1], @grid[2][2]], [@grid[0][2], @grid[1][1], @grid[2][0]]]
+    end
+
+    def win_diagonal?(mark)
+        diagonals.any? do |diag|
+            diag.all?{|pos| pos == mark}
+        end
+    end
     
 end
