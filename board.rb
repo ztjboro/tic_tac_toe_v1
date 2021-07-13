@@ -30,11 +30,14 @@ class Board
         y = position[1] - 1
         if self.empty?(position)
             @grid[x][y] = mark
-            return mark
+            return "Mark Placed"
+            self.print
         elsif !self.valid?(position)
             return "Position invalid"
+            self.print
         elsif !self.empty?(position)
             return "Position taken"
+            self.print
         end  
     end
 
@@ -51,6 +54,7 @@ class Board
                 return true
             end
         end
+        false
     end
 
     def win_col?(mark)
@@ -59,16 +63,20 @@ class Board
                 return true
             end
         end
+        false
     end
 
-    def diagonals
+    def diagonal
         [[@grid[0][0], @grid[1][1], @grid[2][2]], [@grid[0][2], @grid[1][1], @grid[2][0]]]
     end
 
     def win_diagonal?(mark)
-        diagonals.any? do |diag|
+        diagonal.any? do |diag|
             diag.all?{|pos| pos == mark}
         end
     end
     
+    def win?(mark)
+        win_col?(mark) || win_row?(mark) || win_diagonal?(mark)
+    end
 end
