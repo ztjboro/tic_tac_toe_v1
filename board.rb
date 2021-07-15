@@ -2,44 +2,38 @@
 class Board
 
     def initialize
-        @grid = Array.new(3) { Array.new(3){"_"} }
+        @grid = Array.new(3) { Array.new(3)}
     end
 
     def valid?(position)
-        x = position[0] - 1
-        y = position[1] - 1
-        if  (@grid.length > x && x >= 0) && (@grid[0].length > y && y >= 0)
-            return true
-        else 
-            return false
-        end
+        if (0..2).include?(position[0]) && (0..2).include?(position[1])
+            true
+        else
+            puts "Incorrect position!"
     end
     
     def empty?(position)
-        x = position[0] - 1
-        y = position[1] - 1
-        if self.valid?(position) && (@grid[x][y] == "_")
-            return true
+        if @grid[position[0][position[1]]].nil?
+            true
         else
-            return false
-        end
+           puts "Position taken!"
     end
-
-    def place_mark(position, mark)
-        x = position[0] - 1
-        y = position[1] - 1
-        if self.empty?(position)
-            @grid[x][y] = mark
-            return "Mark Placed"
-            self.print
-        elsif !self.valid?(position)
-            return "Position invalid"
-            self.print
-        elsif !self.empty?(position)
-            return "Position taken"
-            self.print
-        end  
-    end
+    
+    # def place_mark(position, mark)
+    #     x = position[0] - 1
+    #     y = position[1] - 1
+    #     if self.empty?(position)
+    #         @grid[x][y] = mark
+    #         return "Mark Placed"
+    #         self.print
+    #     elsif !self.valid?(position)
+    #         return "Position invalid"
+    #         self.print
+    #     elsif !self.empty?(position)
+    #         return "Position taken"
+    #         self.print
+    #     end  
+    # end
 
     def print
         @grid.each do |row|
