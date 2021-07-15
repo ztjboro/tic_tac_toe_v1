@@ -79,4 +79,10 @@ class Board
     def win?(mark)
         win_col?(mark) || win_row?(mark) || win_diagonal?(mark)
     end
+    
+    def empty_positions?
+        @grid.any? do |row|
+            row.any? {|cell| cell == "_"}
+        end 
+        end
 end
